@@ -1,21 +1,3 @@
-#!/usr/bin/env python
-
-"""Description
-
-Setup script for IRTools -- a powerful toolset for intron retention detection and analysis
-
-Copyright (c) 2018 Zhouhao Zeng <zzhlbj23@gwmail.gwu.edu>
-
-This code is free software; you can redistribute it and/or modify it
-under the terms of the BSD License (see the file COPYING included with
-the distribution).
-
-@version: 1.0.0
-@author:  Zhouhao Zeng
-@contact: zzhlbj23@gwmail.gwu.edu
-"""
-
-
 import os
 import logging
 import re
