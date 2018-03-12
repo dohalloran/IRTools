@@ -1,0 +1,3 @@
+include README.md MANIFEST setup.py bin/IRTools
+recursive-include IRTools *.py
+prune test
