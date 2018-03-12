@@ -33,7 +33,7 @@ def main():
 
         setup(name="IRTools",
               version="1.1.0",
-              description="a powerful toolset for intron retention detection",
+              description="a computational toolset for detection and analysis of intron retention from RNA-Seq libraries",
               author='Zhouhao Zeng',
               author_email='zzhlbj23@gwmail.gwu.edu',
               url='https://github.com/zhouhaozeng/IRTools/',
@@ -47,7 +47,7 @@ def main():
                       'Environment :: Console',
                       'Intended Audience :: Developers',
                       'Intended Audience :: Science/Research',              
-                      'License :: OSI Approved :: BSD License',
+                      'License :: OSI Approved :: GNU General Public License (GPL)',
                       'Operating System :: MacOS :: MacOS X',
                       'Operating System :: POSIX',
                       'Topic :: Scientific/Engineering :: Bio-Informatics',
