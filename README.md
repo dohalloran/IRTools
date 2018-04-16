@@ -52,7 +52,7 @@ There are three major functions available in IRTools serving as sub-commands.
 | diff | Detection of differential intron retention from two samples with replicates in both gene and intron levels. |
 
 
-### annotation
+>### annotation
 
 #### `Arguments`
 **-g/--GTF-file GTFFILE**
@@ -78,9 +78,11 @@ chr1	IR_annotation	constitutive_intronic_region	3411983	3660632    .  	-	  .    
 chr1	IR_annotation	constitutive_junction	        3660632	3660632	   . 	-	  .	   constitutive_junction_type "5'_splice_junction"; constitutive_junction_number "001"; downstream "constitutive_intronic_region_number 001"; gene_id "Xkr4"; upstream "constitutive_exonic_region_number 001"
 ```
 
-### quant
+>### quant
 
 #### `Arguments`
+> General arguments:
+
 **-q/--quant-type {IRI,IRC}**
 
 IR quantifiation types: intron retention index (IRI), intron retention coefficient (IRC). DEFAULT: "IRI".
@@ -114,4 +116,30 @@ Specify a species for which integrated IR annotation
                         and one is required.
                         
 
-**-e/--species {hg19,mm9}**
+**-g/--annotation-file ANNOFILE**
+
+IR annotation GTF file user-built by "IRTools
+                        annotation" command. -e and -g are mutually exclusive
+                        and one is required.
+                        
+**-n/--name NAME**
+
+Sample name, which will be used to generate output
+                        file names. REQUIRED.
+
+**--outdir**
+
+If specified, all output files will be written to that directory. DEFAULT: the current working directory.
+
+#### `Outputs`
+
+**-q IRI**
+
+`ANNOFILE` is the output GTF file that contains information for intron retention analysis, including the genomic coordinates of introns, exon-intron junctions, etc.
+
+Sample lines are as follows.
+
+```
+chr1	IR_annotation	constitutive_intronic_region	3411983	3660632    .  	-	  .    downstream_constitutive_junction_number "002"; constitutive_intronic_region_number "001"; upstream_constitutive_junction_number "001"; gene_id "Xkr4"
+chr1	IR_annotation	constitutive_junction	        3660632	3660632	   . 	-	  .	   constitutive_junction_type "5'_splice_junction"; constitutive_junction_number "001"; downstream "constitutive_intronic_region_number 001"; gene_id "Xkr4"; upstream "constitutive_exonic_region_number 001"
+```
