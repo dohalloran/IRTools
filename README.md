@@ -71,8 +71,10 @@ If specified, all output files will be written to that directory. Default: the c
 
 ANNOFILE is a GTF file that contains information for intron retention analysis. i.e., the genomic coordinates of introns, exon-intron junctions, etc.
 
+Sample lines are as follows.
+
 ```
 chr1	IR_annotation	constitutive_intronic_region	3411983	3660632	.	-	.	downstream_constitutive_junction_number "002"; constitutive_intronic_region_number "001"; upstream_constitutive_junction_number "001"; gene_id "Xkr4"
-chr1	IR_annotation	constitutive_junction	3660632	3660632	.	-	.	constitutive_junction_type "5'_splice_junction"; constitutive_junction_number "001"; downstream "constitutive_intronic_region_number 001"; gene_id "Xkr4"; upstream "constitutive_exonic_region_number 001"
+chr1	IR_annotation	constitutive_junction	        3660632	3660632	.	-	.	constitutive_junction_type "5'_splice_junction"; constitutive_junction_number "001"; downstream "constitutive_intronic_region_number 001"; gene_id "Xkr4"; upstream "constitutive_exonic_region_number 001"
 ```
 
