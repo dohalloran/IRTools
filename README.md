@@ -65,11 +65,11 @@ Output annotation GTF file.
 
 **--outdir**
 
-If specified, all output files will be written to that directory. Default: the current working directory.
+If specified, all output files will be written to that directory. DEFAULT: the current working directory.
 
-#### `Output`
+#### `Outputs`
 
-ANNOFILE is a GTF file that contains information for intron retention analysis. i.e., the genomic coordinates of introns, exon-intron junctions, etc.
+`ANNOFILE` is the output GTF file that contains information for intron retention analysis, including the genomic coordinates of introns, exon-intron junctions, etc.
 
 Sample lines are as follows.
 
@@ -78,3 +78,40 @@ chr1	IR_annotation	constitutive_intronic_region	3411983	3660632    .  	-	  .    
 chr1	IR_annotation	constitutive_junction	        3660632	3660632	   . 	-	  .	   constitutive_junction_type "5'_splice_junction"; constitutive_junction_number "001"; downstream "constitutive_intronic_region_number 001"; gene_id "Xkr4"; upstream "constitutive_exonic_region_number 001"
 ```
 
+### quant
+
+#### `Arguments`
+**-q/--quant-type {IRI,IRC}**
+
+IR quantifiation types: intron retention index (IRI), intron retention coefficient (IRC). DEFAULT: "IRI".
+
+**-i/--alt-file ALTFILE**
+
+Input RNA-Seq alignment file. If IR quantifiation type is "IRI", the input file can be BAM or BED file. If IR quantification type is "IRC", the input file can only be BAM file.
+
+**-p/--read-type {paired,single}**
+
+"paired" is for paired-end data and "single" is for single-end data. DEFAULT: "single".
+
+**-f/--library-type {fr-unstranded,fr-firststrand,fr-secondstrand}**
+
+Library type. DEFAULT: "fr-unstranded" (unstranded). Use "fr-firststrand" or "fr-secondstrand" for strand-specific data.
+
+**-u/--map-file MAPFILE**
+
+Mappability score bigWig file (depends on species,
+                        sequence length of RNA-Seq library, etc). Or specify a
+                        species (i.e. hg19 or mm9) for which a default
+                        annotation file (default for 50 bps of single end RNA-
+                        Seq library) can be downloaded and used. If specified,
+                        mappability will take into account.
+                        
+**-e/--species {hg19,mm9}**
+
+Specify a species for which integrated IR annotation
+                        GTF file can be used.                    
+<br>Note: -e and -g are mutually exclusive
+                        and one is required.
+                        
+
+**-e/--species {hg19,mm9}**
