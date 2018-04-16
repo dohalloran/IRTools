@@ -148,7 +148,7 @@ Set when IR quantifiation type is "IRC". Minimum
 
 `1. NAME.quant.IRI.genes.txt` is the quantificaiton of intron retention index for all genes from RNA-Seq library.
 
-Sample lines are as follows.
+Sample lines are as follows. xx
 
 ```
 | gene_id |	gene_iv | gene_CIR_length | gene_CER_length | gene_CIR_read_count | gene_CER_read_count | gene_CIR_RPKM | gene_CER_RPKM | gene_IRI |
