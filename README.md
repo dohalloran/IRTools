@@ -146,11 +146,21 @@ Set when IR quantifiation type is "IRC". Minimum
 
 **-q IRI**
 
-`1. NAME.quant.IRI.genes.txt` is the quantificaiton of intron retention index for all genes from RNA-Seq library.
+1. `NAME.quant.IRI.genes.txt` is the quantification of intron retention index for all genes from RNA-Seq library ALTFILE.
 
-Sample lines are as follows.
+The file format is as follows.
 
 | gene_id |	gene_iv | gene_CIR_length | gene_CER_length | gene_CIR_read_count | gene_CER_read_count | gene_CIR_RPKM | gene_CER_RPKM | gene_IRI |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | A1BG | chr19:58858171-58864865 | 4071 | 1766 | 80.13888888888889 | 93.86111111111111 | 0.7394798014780853 | 1.9965449549590883 | 0.37037974008115343 |
 | A1CF | chr10:52559168-52645435 | 72712 | 9221 | 24.0 | 59.0 | 0.012399074027101793 | 0.2403577285944172 | 0.051585917788498296 |
+
+2. `NAME.quant.IRI.intronss.txt` is the quantification of intron retention index for all introns from RNA-Seq library ALTFILE.
+
+The file format is as follows.
+
+| CIR_id |	CIR_iv |	CIR_length |	adjacent_CER_length |	CIR_read_count |	adjacent_CER_read_count |	CIR_RPKM |	adjacent_CER_RPKM |	intron_IRI |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A1BG:004 | chr19:58863053-58863648 | 474 | 570 | 7.138888888888889 | 17.02777777777778 | 0.5657653978142747 | 1.122192132703333 | 0.5041609019761704 |
+| A1BG:005| chr19:58862017-58862756| 739 | 579 | 18.13888888888889 | 25.22222222222222 | 0.9220412349334726 | 1.636397795045001 | 0.5634578815281992 |
+
