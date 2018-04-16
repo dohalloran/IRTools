@@ -149,8 +149,6 @@ Set when IR quantifiation type is "IRC". Minimum
 
 #### `Outputs`
 
-<br>
-
 **-q IRI**
 
 1\. `NAME.quant.IRI.genes.txt` is the quantification of intron retention index for all genes from RNA-Seq library ALTFILE.
@@ -258,6 +256,27 @@ Type of analysis performed. "P" is for paired
                         analysis. DEFAULT: "U".
                         
 #### `Outputs`
+
+**-q IRI**
+
+1\. `NAME.diff.IRI.genes.txt` is the detection of differential intron retention index from two RNA-Seq samples S1FILES and S2FILES for all genes.
+
+The file format is as follows.
+
+| gene_id |	PValue |	FDR |	gene_IRI_S1 |	gene_IRI_S2 |	ene_IRI_difference |
+| --- | --- | --- | --- | --- | --- |
+| Aaas | 0.189649931299 | 0.558970463129 | 0.008,0.01,0.007 | 0.012,0.008,0.019 | 0.005 |
+| 9530051G07Rik | 0.00474936472952 | 0.0199711015431 | 0.0,0.0,0.0 | 0.183,0.366,0.0 0.183 |
+
+2\. `NAME.diff.IRI.introns.txt` is the detection of differential intron retention index from two RNA-Seq samples S1FILES and S2FILES for all introns.
+
+The file format is as follows.
+
+| CIR_id |	PValue |	FDR |	intron_IRI_S1 |	intron_IRI_S2 |	intron_IRI_difference |
+| --- | --- | --- | --- | --- | --- |
+| Aacs:014 | 1.0 | 1.0 | 0.0,0.004,0.0 | 0.003,0.005,0.03 | 0.011 |
+| Abca7:017 | 1.97072661512e-54 | 1.13601945194e-52 | 0.108,0.394,0.281 | 0.0,0.033,0.0 | -0.25 |
+
 
 
 
