@@ -69,8 +69,6 @@ Output annotation GTF file.
 
 If specified, all output files will be written to that directory. DEFAULT: the current working directory.
 
-<br>
-
 #### `Outputs`
 
 `ANNOFILE` is the output GTF file that contains information for intron retention analysis, including the genomic coordinates of introns, exon-intron junctions, etc.
@@ -148,8 +146,6 @@ Set when IR quantifiation type is "IRI". Specify input
 Set when IR quantifiation type is "IRC". Minimum
                         length of overlap between the reads and each of the
                         exons or introns involved in splicing. DEFAULT: 8.
-
-<br>
 
 #### `Outputs`
 
