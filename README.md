@@ -51,6 +51,8 @@ There are three major functions available in IRTools serving as sub-commands.
 | quant | Quantify intron retention in both gene and intron levels. |
 | diff | Detection of differential intron retention from two samples with replicates in both gene and intron levels. |
 
+<br>
+<br>
 
 ### annotation
 
@@ -200,3 +202,57 @@ The file format is as follows.
 <br>
 
 ### diff
+
+#### `Arguments`
+
+Arguments that are same as `IRTools quant`: 
+
+**-q/--quant-type {IRI,IRC}**
+
+**-p/--read-type {paired,single}**
+
+**-f/--library-type {fr-unstranded,fr-firststrand,fr-secondstrand}**
+
+**-u/--map-file MAPFILE**
+
+**-e/--species {hg19,mm9}**
+
+**-g/--annotation-file ANNOFILE**
+
+**-n/--name NAME**
+
+**--outdir**
+
+**-f/--format {BAM,BED}**
+
+**-m/--min_overlap MINOVERLAP**
+
+Additional arguments:
+
+**-s1/--s1-files S1FILES**
+
+A comma-separated list of RNA-Seq alignment BAM files
+                        for sample 1.
+                        
+**-s2/--s2-files S1FILES**
+
+A comma-separated list of RNA-Seq alignment BAM files
+                        for sample 2.
+                        
+**-c/--cutoff CUTOFF**
+
+The cutoff of IR difference between sample 1 and
+                        sample 2. The cutoff is used in the null hypothesis
+                        test for differential IR. DEFAULT: 0.0001 difference.
+                        
+**-t/--analysis-type {P,U}**
+
+Type of analysis performed. "P" is for paired
+                        replicates analysis and "U" is for unpaired replicates
+                        analysis. DEFAULT: "U".
+                        
+#### `Outputs`
+
+
+
+
