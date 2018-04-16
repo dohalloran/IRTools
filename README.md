@@ -278,6 +278,32 @@ The file format is as follows.
 | Abca7:017 | 1.97072661512e-54 | 1.13601945194e-52 | 0.108,0.394,0.281 | 0.0,0.033,0.0 | -0.25 |
 
 
+<br>
+
+**-q IRC**
+
+1\. `NAME.diff.IRC.genes.txt` is the detection of differential intron retention coefficient from two RNA-Seq samples S1FILES and S2FILES for all genes.
+
+The file format is as follows.
+
+| gene_id |	PValue |	FDR |	gene_IRC_S1 |	gene_IRC_S2 |	gene_IRC_difference |
+| --- | --- | --- | --- | --- | --- |
+
+2\. `NAME.diff.IRC.introns.txt` is the detection of differential intron retention coefficient from two RNA-Seq samples S1FILES and S2FILES for all introns.
+
+The file format is as follows.
+
+| CIR_id |	PValue |	FDR |	intron_IRC_S1 |	intron_IRC_S2 |	intron_IRC_difference |
+| --- | --- | --- | --- | --- | --- |
+
+3\. `NAME.diff.IRC.introns.txt` is the detection of differential intron retention coefficient from two RNA-Seq samples S1FILES and S2FILES for all exon-intron junctions.
+
+The file format is as follows.
+
+| CJ_id |	PValue |	FDR |	junction_IRC_S1 |	junction_IRC_S2 |	junction_IRC_difference |
+| --- | --- | --- | --- | --- | --- |
+
+
 
 
 
