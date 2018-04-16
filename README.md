@@ -3,6 +3,8 @@ IRTools is a computational toolset for detection and analysis of intron retentio
 
 ## Installation
 
+
+
 #### PIP
 
 To install directly from PyPI:
@@ -21,15 +23,19 @@ pip install networkx
 pip install bx-python==0.7.3
 ```
 
-#### Using setup.py
 
-Install the dependencies with your favorite tools (`pip`, `conda`, etc.).
+#### From source
 
-To install `IRTools` itself, run:
+To install from source:
+
+1\. Install the dependencies with your favorite tools (`pip`, `conda`, etc.).
+
+2\. Run:
 
 ```
-python setup.py build install
+python setup.py install
 ```
+
 
 ## Usage
 
