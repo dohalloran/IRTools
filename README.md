@@ -45,7 +45,8 @@ IRTools [-h] [-v] {annotation,quant,diff} ...
 
 There are three major functions available in IRTools serving as sub-commands.
 
-| Command | Description |
+| Sub-command | Function |
 | --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
+| annotation | Generate annotation GTF file for intron retention analysis. |
+| quant | Quantify intron retention in both gene and intron levels. |
+| diff | Detection of differential intron retention from two samples with replicates in both gene and intron levels. |
