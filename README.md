@@ -296,7 +296,7 @@ The file format is as follows.
 | CIR_id |	PValue |	FDR |	intron_IRC_S1 |	intron_IRC_S2 |	intron_IRC_difference |
 | --- | --- | --- | --- | --- | --- |
 
-3\. `NAME.diff.IRC.introns.txt` is the detection of differential intron retention coefficient from two RNA-Seq samples S1FILES and S2FILES for all exon-intron junctions.
+3\. `NAME.diff.IRC.junctions.txt` is the detection of differential intron retention coefficient from two RNA-Seq samples S1FILES and S2FILES for all exon-intron junctions.
 
 The file format is as follows.
 
