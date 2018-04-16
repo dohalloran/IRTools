@@ -9,10 +9,7 @@ def run(args):
                 IRI_quanter.output_IRI_intron_level()
                 IRI_quanter.output_IRI_gene_level()
                 IRI_quanter.output_IRI_genome_wide()
-                
-                if args.ERCC:
-                        from quant_ERCC_spike_in import run_quant_ERCC_spike_in
-                        run_quant_ERCC_spike_in(args)                  
+
         elif args.quanttype == 'IRC':
                 from IRTools.quant_IRC import IRC_quant
                 IRC_quanter = IRC_quant(args)

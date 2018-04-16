@@ -1,3 +1,2 @@
-include README.md MANIFEST setup.py bin/IRTools
-recursive-include IRTools *.py
-prune test
+include README.md MANIFEST LICENSE setup.py bin/IRTools
+recursive-include IRTools *

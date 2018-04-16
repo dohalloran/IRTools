@@ -2,29 +2,6 @@ import os
 import sys
 from setuptools import setup
 
-try:
-        import HTSeq
-except: 
-        sys.stderr.write("CRITICAL:HTSeq must be installed!\n")
-        sys.exit(1)
-
-try:
-        import pysam
-except: 
-        sys.stderr.write("CRITICAL:pysam must be installed!\n")
-        sys.exit(1)
-
-try:
-        import pandas
-except: 
-        sys.stderr.write("CRITICAL:pandas must be installed!\n")
-        sys.exit(1)
-
-try:
-        import networkx
-except: 
-        sys.stderr.write("CRITICAL:networkx must be installed!\n")
-        sys.exit(1)
 
 def main():
         if float(sys.version[:3])<2.7 or float(sys.version[:3])>=2.8:
@@ -32,7 +9,7 @@ def main():
                 sys.exit(1)
 
         setup(name="IRTools",
-              version="1.1.0",
+              version="1.1.3.0",
               description="a computational toolset for detection and analysis of intron retention from RNA-Seq libraries",
               author='Zhouhao Zeng',
               author_email='zzhlbj23@gwmail.gwu.edu',
@@ -40,8 +17,8 @@ def main():
               package_dir={'IRTools' : 'IRTools'},
               packages=['IRTools'],   
               package_data={'IRTools': ['data/*.gtf']},
-              scripts=['bin/IRTools',
-                       ],
+              include_package_data=True,
+              scripts=['bin/IRTools'],
               classifiers=[
                       'Development Status :: 4 - Beta',
                       'Environment :: Console',
@@ -57,7 +34,8 @@ def main():
                       'HTSeq',
                       'pysam',
                       'pandas',
-                      'networkx'
+                      'networkx',
+                      'bx-python==0.7.3'
                       ],
               )
 
