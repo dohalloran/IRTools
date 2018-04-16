@@ -74,8 +74,8 @@ If specified, all output files will be written to that directory. DEFAULT: the c
 Sample lines are as follows.
 
 ```
-chr1	IR_annotation	constitutive_intronic_region	3411983	3660632    .  	-	  .    downstream_constitutive_junction_number "002"; constitutive_intronic_region_number "001"; upstream_constitutive_junction_number "001"; gene_id "Xkr4"
-chr1	IR_annotation	constitutive_junction	        3660632	3660632	   . 	-	  .	   constitutive_junction_type "5'_splice_junction"; constitutive_junction_number "001"; downstream "constitutive_intronic_region_number 001"; gene_id "Xkr4"; upstream "constitutive_exonic_region_number 001"
+chr1	IR_annotation	constitutive_intronic_region	3411983  3660632     .  	-	  .    downstream_constitutive_junction_number "002"; constitutive_intronic_region_number "001"; upstream_constitutive_junction_number "001"; gene_id "Xkr4"
+chr1	IR_annotation	constitutive_junction	        3660632	 3660632	 . 	    -	  .	   constitutive_junction_type "5'_splice_junction"; constitutive_junction_number "001"; downstream "constitutive_intronic_region_number 001"; gene_id "Xkr4"; upstream "constitutive_exonic_region_number 001"
 ```
 
 ### quant
@@ -153,4 +153,4 @@ Sample lines are as follows.
 | gene_id |	gene_iv | gene_CIR_length | gene_CER_length | gene_CIR_read_count | gene_CER_read_count | gene_CIR_RPKM | gene_CER_RPKM | gene_IRI |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | A1BG | chr19:58858171-58864865 | 4071 | 1766 | 80.13888888888889 | 93.86111111111111 | 0.7394798014780853 | 1.9965449549590883 | 0.37037974008115343 |
-| A1BG-AS1 | chr19:58863335-58866549 | 1084	2130 | 19.5 | 8.5 | 0.675755253607134 | 0.14990752152970105 | 4.507814195789016 | 
+| A1CF | chr10:52559168-52645435 | 72712 | 9221 | 24.0 | 59.0 | 0.012399074027101793 | 0.2403577285944172 | 0.051585917788498296 |
