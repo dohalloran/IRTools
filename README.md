@@ -3,7 +3,7 @@ IRTools is a computational toolset for detection and analysis of intron retentio
 
 ## Installation
 
-
+To use `IRTools`, you will need `python 2.7`.
 
 #### PIP
 
