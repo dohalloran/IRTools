@@ -111,7 +111,7 @@ Mappability score bigWig file (depends on species,
                         Seq library) can be downloaded and used. If specified,
                         mappability will take into account.
                         
-Note: to 
+Note: to take into account mappability, download [RSeQC 2.6.2](IRTools/utility/RSeQC-2.6.2), and install: `python setup install`
                         
 **-e/--species {hg19,mm9}** (exclusive with -g)
 
@@ -136,13 +136,13 @@ Sample name, which will be used to generate output
 
 If specified, all output files will be written to that directory. DEFAULT: the current working directory.
 
-**-f/--format {BAM,BED}**
+**-f/--format {BAM,BED}** (specified when -q IRI)
 
 Set when IR quantifiation type is "IRI". Specify input
                         RNA-Seq alignment file format: "BAM", "BED". DEFAULT:
                         "BAM".
                         
-**-m/--min_overlap MINOVERLAP**
+**-m/--min_overlap MINOVERLAP** (specified when -q IRC)
 
 Set when IR quantifiation type is "IRC". Minimum
                         length of overlap between the reads and each of the
@@ -226,9 +226,9 @@ Arguments that are same as `IRTools quant`:
 
 **--outdir**
 
-**-f/--format {BAM,BED}**
+**-f/--format {BAM,BED}** (specified when -q IRI)
 
-**-m/--min_overlap MINOVERLAP**
+**-m/--min_overlap MINOVERLAP** (specified when -q IRC)
 
 <br>
 
