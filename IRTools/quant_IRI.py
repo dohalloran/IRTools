@@ -9,7 +9,6 @@ import numpy as np
 import pandas as pd
 import bisect
 import HTSeq
-from bx.bbi.bigwig_file import BigWigFile
 
 class IRI_quant(object):       
         def __init__(self, args):
@@ -104,6 +103,8 @@ class IRI_quant(object):
                 
                 mapfile = self.params['mapfile']
                 if mapfile:
+                        from bx.bbi.bigwig_file import BigWigFile
+
                         if re.search('bigWig$', mapfile):
                                 mapfile_data = BigWigFile(open(mapfile))
                         elif mapfile == "hg19" or mapfile == "mm9":

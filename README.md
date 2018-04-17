@@ -20,7 +20,6 @@ pip install HTSeq
 pip install pysam
 pip install pandas
 pip install networkx
-pip install bx-python==0.7.3
 ```
 
 
@@ -103,7 +102,7 @@ Input RNA-Seq alignment file. If IR quantifiation type is "IRI", the input file 
 
 Library type. DEFAULT: "fr-unstranded" (unstranded). Use "fr-firststrand" or "fr-secondstrand" for strand-specific data.
 
-**-u/--map-file MAPFILE**
+**-u/--map-file MAPFILE** (optional)
 
 Mappability score bigWig file (depends on species,
                         sequence length of RNA-Seq library, etc). Or specify a
@@ -112,7 +111,9 @@ Mappability score bigWig file (depends on species,
                         Seq library) can be downloaded and used. If specified,
                         mappability will take into account.
                         
-**-e/--species {hg19,mm9}**
+Note: to 
+                        
+**-e/--species {hg19,mm9}** (exclusive with -g)
 
 Specify a species for which integrated IR annotation
                         GTF file can be used.                    
@@ -120,7 +121,7 @@ Specify a species for which integrated IR annotation
                         and one is required.
                         
 
-**-g/--annotation-file ANNOFILE**
+**-g/--annotation-file ANNOFILE** (exclusive with -e)
 
 IR annotation GTF file user-built by "IRTools
                         annotation" command. -e and -g are mutually exclusive
@@ -215,11 +216,11 @@ Arguments that are same as `IRTools quant`:
 
 **-f/--library-type {fr-unstranded,fr-firststrand,fr-secondstrand}**
 
-**-u/--map-file MAPFILE**
+**-u/--map-file MAPFILE** (optional)
 
-**-e/--species {hg19,mm9}**
+**-e/--species {hg19,mm9}** (exclusive with -g)
 
-**-g/--annotation-file ANNOFILE**
+**-g/--annotation-file ANNOFILE** (exclusive with -e)
 
 **-n/--name NAME**
 
