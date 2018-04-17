@@ -18,6 +18,7 @@ If this fails, please install all dependencies first:
 ```
 pip install HTSeq==0.6.1
 pip install pysam==0.7.5
+pip install scipy
 pip install pandas
 pip install networkx
 ```
@@ -105,7 +106,7 @@ Library type. DEFAULT: "fr-unstranded" (unstranded). Use "fr-firststrand" or "fr
 **-u/--map-file MAPFILE** (optional)
 
 Mappability score bigWig file (depends on species,
-                        sequence length of RNA-Seq library, etc). Or specify a
+                        sequence length of RNA-Seq library, etc.). Or specify a
                         species (i.e. hg19 or mm9) for which a default
                         annotation file (default for 50 bps of single end RNA-
                         Seq library) can be downloaded and used. If specified,
