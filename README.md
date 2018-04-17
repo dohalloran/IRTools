@@ -27,7 +27,7 @@ pip install networkx
 
 To install from source:
 
-1\. Install the dependencies with your favorite tools (`pip`, `conda`, etc.).
+1\. Install the dependencies listed above.
 
 2\. Run:
 
