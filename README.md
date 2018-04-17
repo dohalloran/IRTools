@@ -16,8 +16,8 @@ pip install IRTools
 If this fails, please install all dependencies first:
 
 ```
-pip install HTSeq
-pip install pysam
+pip install HTSeq==0.6.1
+pip install pysam==0.7.5
 pip install pandas
 pip install networkx
 ```
