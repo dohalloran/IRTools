@@ -100,7 +100,7 @@ Input RNA-Seq alignment file. If IR quantifiation type is "IRI", the input file 
 
 "paired" is for paired-end data and "single" is for single-end data. DEFAULT: "single".
 
-**-f/--library-type {fr-unstranded,fr-firststrand,fr-secondstrand}**
+**-s/--library-type {fr-unstranded,fr-firststrand,fr-secondstrand}**
 
 Library type. DEFAULT: "fr-unstranded" (unstranded). Use "fr-firststrand" or "fr-secondstrand" for strand-specific data.
 
@@ -216,7 +216,7 @@ Arguments that are same as `IRTools quant`:
 
 **-p/--read-type {paired,single}**
 
-**-f/--library-type {fr-unstranded,fr-firststrand,fr-secondstrand}**
+**-s/--library-type {fr-unstranded,fr-firststrand,fr-secondstrand}**
 
 **-u/--map-file MAPFILE** (optional)
 
