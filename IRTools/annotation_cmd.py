@@ -6,20 +6,21 @@ import collections
 import HTSeq
 
 # bad genes are those which have exons in different chromosomes or strands.
-def find_bad_genes(gtffile):
-        exon_dict = {}
-        bad_gene_list = []
-        for feature in gtffile:
-                if feature.type == "exon" and feature.attr["gene_id"] not in bad_gene_list:
-                        gene_id = feature.attr["gene_id"]
-                        gene_chrom = feature.iv.chrom
-                        gene_strand = feature.iv.strand
-                        if gene_id not in exon_dict.keys():
-                                exon_dict[gene_id] = (gene_chrom, gene_strand)
-                        else:
-                                if gene_chrom != exon_dict[gene_id][0] or gene_strand != exon_dict[gene_id][1]:
-                                        bad_gene_list.append(gene_id)    
-        return bad_gene_list
+#def find_bad_genes(gtffile):
+#        exon_dict = {}
+#        bad_gene_list = []
+#        for feature in gtffile:
+#                if feature.type == "exon" and feature.attr["gene_id"] not in bad_gene_list:
+#                        gene_id = feature.attr["gene_id"]
+#                        gene_chrom = feature.iv.chrom
+#                        gene_strand = feature.iv.strand
+#                        if gene_id not in exon_dict.keys():
+#                                exon_dict[gene_id] = (gene_chrom, gene_strand)
+#                        else:
+#                                if gene_chrom != exon_dict[gene_id][0] or gene_strand != exon_dict[gene_id][1]:
+#                                        bad_gene_list.append(gene_id)    
+#        return bad_gene_list
+#
 
 # Feature is an exon, the transcript region will extend to include the exon region.
 def extend_transcript_region(feature, transcript_region):
@@ -90,6 +91,20 @@ def find_CDS_and_UTR_region_iv(start_codon_region_iv, stop_codon_region_iv, tran
                 three_UTR_region_iv = HTSeq.GenomicInterval(UTR_region_chrom, transcript_region_iv.start, stop_codon_region_iv.start, UTR_region_strand)
         return (CDS_region_iv, five_UTR_region_iv, three_UTR_region_iv)   
 
+#def find_CDS_and_UTR_region(start_codon_region, stop_codon_region, transcript_region):
+#        CDS_region = collections.defaultdict( lambda: dict() )
+#        five_UTR_region = collections.defaultdict( lambda: dict() )
+#        three_UTR_region = collections.defaultdict( lambda: dict() )        
+#        for gene_id in start_codon_region.keys():
+#                for transcript_id in start_codon_region[gene_id].keys():
+#                        start_codon_region_iv = start_codon_region[gene_id][transcript_id]
+#                        stop_codon_region_iv = stop_codon_region[gene_id][transcript_id]
+#                        transcript_region_iv = transcript_region[gene_id][transcript_id]
+#                        (CDS_region_iv, five_UTR_region_iv, three_UTR_region_iv) = find_CDS_and_UTR_region_iv(start_codon_region_iv, stop_codon_region_iv, transcript_region_iv)
+#                        CDS_region[gene_id][transcript_id] = CDS_region_iv
+#                        five_UTR_region[gene_id][transcript_id] = five_UTR_region_iv
+#                        three_UTR_region[gene_id][transcript_id] = three_UTR_region_iv                        
+#        return (CDS_region, five_UTR_region, three_UTR_region)
 def find_CDS_and_UTR_region(start_codon_region, stop_codon_region, transcript_region):
         CDS_region = collections.defaultdict( lambda: dict() )
         five_UTR_region = collections.defaultdict( lambda: dict() )
@@ -97,12 +112,17 @@ def find_CDS_and_UTR_region(start_codon_region, stop_codon_region, transcript_re
         for gene_id in start_codon_region.keys():
                 for transcript_id in start_codon_region[gene_id].keys():
                         start_codon_region_iv = start_codon_region[gene_id][transcript_id]
-                        stop_codon_region_iv = stop_codon_region[gene_id][transcript_id]
-                        transcript_region_iv = transcript_region[gene_id][transcript_id]
-                        (CDS_region_iv, five_UTR_region_iv, three_UTR_region_iv) = find_CDS_and_UTR_region_iv(start_codon_region_iv, stop_codon_region_iv, transcript_region_iv)
-                        CDS_region[gene_id][transcript_id] = CDS_region_iv
-                        five_UTR_region[gene_id][transcript_id] = five_UTR_region_iv
-                        three_UTR_region[gene_id][transcript_id] = three_UTR_region_iv                        
+                        ## add a condition here
+                        if gene_id in stop_codon_region.keys():
+                            stop_codon_region_iv = stop_codon_region[gene_id][transcript_id]
+                            transcript_region_iv = transcript_region[gene_id][transcript_id]
+                            (CDS_region_iv, five_UTR_region_iv, three_UTR_region_iv) = find_CDS_and_UTR_region_iv(start_codon_region_iv, stop_codon_region_iv, transcript_region_iv)
+                            CDS_region[gene_id][transcript_id] = CDS_region_iv
+                            five_UTR_region[gene_id][transcript_id] = five_UTR_region_iv
+                            three_UTR_region[gene_id][transcript_id] = three_UTR_region_iv    
+                        else:
+                            del start_codon_region[gene_id]
+                            del transcript_region[gene_id]   
         return (CDS_region, five_UTR_region, three_UTR_region)
 
 def find_region_number(pos, feature_list, start_d_or_end_d_as_pos):
@@ -133,11 +153,12 @@ def run(args):
         
         # Read features from the input GTF file.
         gtffile = HTSeq.GFF_Reader(args.inputfile, end_included=True)
-        gtffile = filter(lambda feature: re.search(r'chr[a-zA-Z0-9]+$', feature.iv.chrom), gtffile)
-        bad_gene_list = find_bad_genes(gtffile)
-        logging.info("Removing genes with exons in different chromosomes or strands (%i discarded)" % len(bad_gene_list))
+        # 20211128---Qing
+        # gtffile = filter(lambda feature: re.search(r'chr[a-zA-Z0-9]+$', feature.iv.chrom), gtffile)
+        # bad_gene_list = find_bad_genes(gtffile)
+        # logging.info("Removing genes with exons in different chromosomes or strands (%i discarded)" % len(bad_gene_list))
         
-        gtffile = filter(lambda feature: feature.attr['gene_id'] not in bad_gene_list, gtffile)
+        # gtffile = filter(lambda feature: feature.attr['gene_id'] not in bad_gene_list, gtffile)
         for feature in gtffile:
                 if feature.type == "exon":
                         gene_id = feature.attr["gene_id"]
