@@ -316,7 +316,37 @@ class IRI_quant(object):
                                         if step_set:
                                                 gene_id, feature_type, region_number = list(step_set)[0]
                                                 self.counts[gene_id][feature_type][region_number] += self.get_effective_length(iv, self.gene_map_score) * 1.0 / alt_read_length 
-                                        
+
+        ## 08/04/2021 added  (Qing)
+        def is_overlapped_read_in_one_gene_CER_region(self,alt_iv_seq):
+            GeneInCER = []
+            for alt_iv in alt_iv_seq:
+                    for iv, step_set in self.genes[alt_iv].steps():
+                            # index 0---> gene id
+                            # index 1 ---> featuretype
+                            # extract the gene where the constitutive_exonic_region mapped
+                            GeneInCER.extend( [item[0] for item in step_set if item[1] == "constitutive_exonic_region"]	)
+            if not len(set(GeneInCER)) == 0:
+                OneGene = list(set(GeneInCER))[0]
+            else:
+                OneGene = ""
+            return len(set(GeneInCER)) == 1 , OneGene
+        def assign_read_to_CER_region(self, alt_iv_seq,OneGene):    
+            alt_read_length = self.get_effective_length(alt_iv_seq, self.gene_map_score)
+            if alt_read_length > 0:
+                for alt_iv in alt_iv_seq:
+                                for iv, step_set in self.genes[alt_iv].steps():
+                                    if step_set:
+                                            # print(list(step_set))
+                                            # gene_id, feature_type, region_number = list(step_set)[0] # not correct !!
+                                            OverlapGenes = list(step_set)
+                                            ExtractGene = [g for g in OverlapGenes if g[0] == OneGene]
+                                            if ExtractGene: # only if the extracted gene is the same as OneGene, or it will be empty!!!
+                                                gene_id, feature_type, region_number = ExtractGene[0]
+                                                if feature_type == "constitutive_exonic_region":
+                                                    self.counts[gene_id][feature_type][region_number] += self.get_effective_length(iv, self.gene_map_score) * 1.0 / alt_read_length 
+        ## 08/04/2021 end of adding  (Qing)      
+
         def assign_read_to_bin_filter(self, alt_iv_seq):
                 alt_read_length = self.get_effective_length(alt_iv_seq, self.gene_map_score)
                 if alt_read_length > 0:
@@ -338,7 +368,7 @@ class IRI_quant(object):
                         else:
                                 combine_alt_iv_seq.append(alt.copy())
                 return combine_alt_iv_seq              
-        
+        # 08/04/2021 add another scenario to keep the overlapped reads if these read only mapped to one gene's exon (Qing) 
         def quant(self):
                 self.init_Counter_for_quant()
                 self.total_read_count = 0
@@ -352,7 +382,10 @@ class IRI_quant(object):
                         if self.params['readtype'] == "single":
                                 for alt in bamfile:
                                         # Consider the alignments that are aligned and uniquely mapped.
-                                        if alt.aligned and self.unique_aligned(alt) and re.match('chr', alt.iv.chrom):
+                                        # 20211129 (Qing)
+                                        # if alt.aligned and self.unique_aligned(alt) and re.match('chr', alt.iv.chrom):
+                                        if alt.aligned and self.unique_aligned(alt):
+                                        
                                                 self.total_read_count += 1                                               
                                                 alt_iv_seq = self.get_alt_iv(alt)
                                                                         
@@ -363,12 +396,17 @@ class IRI_quant(object):
                                                         self.assign_read_to_region(alt_iv_seq)                                   
                                                         if self.bin_filter:
                                                                 self.assign_read_to_bin_filter(alt_iv_seq)
-                                                                
+                                                # 08/04/2021 ( Qing )
+                                                elif self.is_overlapped_read_in_one_gene_CER_region(alt_iv_seq)[0]:
+                                                    OneGene = self.is_overlapped_read_in_one_gene_CER_region(alt_iv_seq)[1]
+                                                    self.assign_read_to_CER_region(alt_iv_seq,OneGene)
                         elif self.params['readtype'] == "paired":
                                 for alt_first, alt_second in HTSeq.pair_SAM_alignments(bamfile):
                                         if alt_first == None or alt_second == None:
                                                 continue
-                                        if alt_first.aligned and self.unique_aligned(alt_first) and alt_second.aligned and self.unique_aligned(alt_second) and alt_first.iv.chrom == alt_second.iv.chrom and re.match('chr', alt_first.iv.chrom) and re.match('chr', alt_second.iv.chrom):
+                                        # 20211129  ( Qing )
+                                        # if alt_first.aligned and self.unique_aligned(alt_first) and alt_second.aligned and self.unique_aligned(alt_second) and alt_first.iv.chrom == alt_second.iv.chrom and re.match('chr', alt_first.iv.chrom) and re.match('chr', alt_second.iv.chrom):
+                                        if alt_first.aligned and self.unique_aligned(alt_first) and alt_second.aligned and self.unique_aligned(alt_second) and alt_first.iv.chrom == alt_second.iv.chrom :
                                                 self.total_read_count += 1   
                                                 alt_first_iv_seq, alt_second_iv_seq = self.get_pair_alt_iv(alt_first, alt_second)
                                                 alt_iv_seq = self.combine_pair_iv_seq(alt_first_iv_seq, alt_second_iv_seq)
@@ -377,7 +415,10 @@ class IRI_quant(object):
                                                         self.assign_read_to_region(alt_iv_seq)                                   
                                                         if self.bin_filter:
                                                                 self.assign_read_to_bin_filter(alt_iv_seq)    
-                                                                
+                                                # 08/04/2021  ( Qing )
+                                                elif self.is_overlapped_read_in_one_gene_CER_region(alt_iv_seq)[0]:
+                                                    OneGene = self.is_overlapped_read_in_one_gene_CER_region(alt_iv_seq)[1]
+                                                    self.assign_read_to_CER_region(alt_iv_seq,OneGene)                                          
                 elif self.params['format'] == "BED":
                         # If pair end, input bed files probably consist of "+" strand bed file and "-" strand bed file. The input format is: p_bedfile,m_bedfile
                         inputfile_list = self.params['altfile'].split(",")
@@ -390,7 +431,10 @@ class IRI_quant(object):
                                                 self.assign_read_to_region([alt.iv])                                   
                                                 if self.bin_filter:
                                                         self.assign_read_to_bin_filter([alt.iv])                                                   
-                                                        
+                                        # 08/04/2021  ( Qing )
+                                        elif self.is_overlapped_read_in_one_gene_CER_region(alt_iv_seq)[0]:
+                                                    OneGene = self.is_overlapped_read_in_one_gene_CER_region(alt_iv_seq)[1]
+                                                    self.assign_read_to_CER_region(alt_iv_seq,OneGene)
         @staticmethod
         def CIRs_in_consitutive_junction_graph(graph):
                 return sorted([node for node in graph.nodes() if re.match('constitutive_intronic_region', node)])        
@@ -465,7 +509,9 @@ class IRI_quant(object):
                                 CIR_effective_length = self.CIR_effective_length[gene_id][CIR_number]
                                 if CIR_effective_length == 0: 
                                         continue
-                                
+                                # 20211129   ( Qing )
+                                if self.total_read_count==0:
+                                        continue
                                 CIR_read_count = self.counts[gene_id]["constitutive_intronic_region"][CIR_number]
                                 CIR_RPKM = CIR_read_count / (CIR_effective_length / 1000.0) / (self.total_read_count / 1000000.0)     
                                 
@@ -531,7 +577,9 @@ class IRI_quant(object):
                         
                         if gene_CIR_effective_length == 0:
                                 continue
-        
+                        # 20211129  ( Qing )   
+                        if self.total_read_count==0:
+                                continue
                         gene_CIR_read_count = sum(self.counts[gene_id]["constitutive_intronic_region"].values())
                         gene_CER_read_count = sum(self.counts[gene_id]["constitutive_exonic_region"].values())
                         
